@@ -73,7 +73,8 @@ class PromptRequest(BaseModel):
 
 @app.get("/", response_class=HTMLResponse)
 def read_index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    # return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(name="index.html", request=request, context={})
 
 
 @app.get("/api", response_class=JSONResponse)
