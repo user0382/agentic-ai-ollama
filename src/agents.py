@@ -7,12 +7,18 @@ from src.research_tools import (
     wikipedia_search_tool,
 )
 
-client = Client()
+client = Client(
+    {
+        "ollama": {
+            "timeout": 300
+        }
+    }
+)
 
 
 # === Research Agent ===
 def research_agent(
-    prompt: str, model: str = "openai:gpt-4.1-mini", return_messages: bool = False
+    prompt: str, model: str = "ollama:minimax-m3:cloud", return_messages: bool = False
 ):
     print("==================================")
     print("🔍 Research Agent")
@@ -154,10 +160,10 @@ USER RESEARCH REQUEST:
 
 def writer_agent(
     prompt: str,
-    model: str = "openai:gpt-4.1-mini",
-    min_words_total: int = 2400,
-    min_words_per_section: int = 400,
-    max_tokens: int = 15000,
+    model: str = "ollama:minimax-m3:cloud",
+    min_words_total: int = 800,
+    min_words_per_section: int = 250,
+    max_tokens: int = 3000,
     retries: int = 1,
 ):
     print("==================================")
@@ -248,7 +254,7 @@ INTERNAL CHECKLIST (DO NOT INCLUDE IN OUTPUT):
 
 def editor_agent(
     prompt: str,
-    model: str = "openai:gpt-4.1-mini",
+    model: str = "ollama:minimax-m3:cloud",
     target_min_words: int = 2400,
 ):
     print("==================================")
