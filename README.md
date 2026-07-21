@@ -74,6 +74,34 @@ Optional (if you want to override defaults done by the entrypoint):
 
 ---
 
+# Check your ollama working first
+
+### 1) List your installed ollama
+```bash
+ollama list
+```
+
+You should see logs like:
+
+```
+NAME                        ID              SIZE      MODIFIED   
+minimax-m3:cloud            d03a959f45c0    -         7 days ago    
+qwen2.5-coder:14b           9ec8897f747e    9.0 GB    7 days ago    
+deepseek-coder:6.7b-base    585a5cb3b219    3.8 GB    7 days ago 
+```
+
+If you don't have installed anyone, go to https://ollama.com/ and pull some local or free cloud model. I have pulled 3 
+models out of these 3,  qwen2.5-coder:14b and deepseek-coder:6.7b-base are downloaded locally and used. 
+
+### 2) Check the network setting of your ollama
+By default ollama uses 11434 port unless you have changed it manually. To conform, just run
+```bash
+ss -ltnp | grep 11434
+```
+You should get something like this:
+```
+LISTEN 0      4096            127.0.0.1:11434      0.0.0.0:*  
+```
 ## Build & Run (local/dev)
 
 ### 1) Build
@@ -85,7 +113,7 @@ docker build -t fastapi-postgres-service .
 ### 2) Run (foreground)
 
 ```bash
-docker run --rm -it  -p 8000:8000  -p 5432:5432  --name fpsvc  --env-file .env  fastapi-postgres-service
+docker run --rm -it   --network host   --name fpsvc   --env-file .env   fastapi-postgres-service
 ```
 
 You should see logs like:
