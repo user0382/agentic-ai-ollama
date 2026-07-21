@@ -43,7 +43,6 @@ This repo includes a Docker setup that runs **Postgres + the API in one containe
 * API keys stored in a `.env` file:
 
   ```
-  OPENAI_API_KEY=your-open-api-key
   TAVILY_API_KEY=your-tavily-api-key
   ```
 
